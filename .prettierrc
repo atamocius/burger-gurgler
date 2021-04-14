@@ -1,0 +1,21 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "options": {
+        "parser": "typescript",
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "jsxSingleQuote": true,
+        "arrowParens": "avoid"
+      }
+    }
+  ]
+}
