@@ -23,8 +23,20 @@ const useStyles = makeStyles({
   },
 });
 
+const defaults = {
+  position: [0, 0, 0],
+  scale: 1,
+  rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
+};
+
 export default function ItemCard({ data }) {
-  const { name, model: Model, position, scale, rotation } = data;
+  const {
+    name,
+    model: Model,
+    position = defaults.position,
+    scale = defaults.scale,
+    rotation = defaults.rotation,
+  } = data;
 
   const classes = useStyles();
 
