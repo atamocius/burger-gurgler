@@ -22,9 +22,9 @@ export default [
   {
     name: 'Taco',
     model: m.Taco,
-    position: [0, -0.15, 0],
-    scale: 1.7,
-    rotation: [Math.PI * 0.1, Math.PI * 0.35, Math.PI * 0.07],
+    position: [0, -0.08, 0],
+    scale: 1.5,
+    rotation: [Math.PI * 0.3, Math.PI * 0.35, Math.PI * 0.07],
   },
   {
     name: 'Cake',
