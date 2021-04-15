@@ -37,6 +37,11 @@ const defaults = {
   rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
 };
 
+// TODO: Move to utils
+function toDisplayAmount(cents) {
+  return `₱ ${(cents / 100).toFixed(2)}`;
+}
+
 export default function ItemCard({ data, onAddToCart }) {
   const {
     name,
@@ -45,6 +50,9 @@ export default function ItemCard({ data, onAddToCart }) {
     scale = defaults.scale,
     rotation = defaults.rotation,
   } = data;
+
+  const price = toDisplayAmount(19999);
+  const quantity = `x ${10}`;
 
   const classes = useStyles();
 
@@ -78,8 +86,11 @@ export default function ItemCard({ data, onAddToCart }) {
             <Typography className={classes.name} variant='h5' component='h2'>
               {name}
             </Typography>
-            <Chip color='secondary' label='99' />
+            <Chip color='secondary' label={quantity} />
           </Grid>
+          <Typography variant='body2' color='textSecondary' component='p'>
+            {price}
+          </Typography>
         </CardContent>
       </CardActionArea>
 
