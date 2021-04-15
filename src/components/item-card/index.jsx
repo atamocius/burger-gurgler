@@ -9,19 +9,27 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
 
 import { Canvas } from '@react-three/fiber';
 
 import RotatingModel from './rotating-model';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 260,
   },
   media: {
     height: 220,
   },
-});
+  name: {
+    marginRight: theme.spacing(1),
+  },
+  addToCartBtn: {
+    width: '100%',
+  },
+}));
 
 const defaults = {
   position: [0, 0, 0],
@@ -29,7 +37,7 @@ const defaults = {
   rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
 };
 
-export default function ItemCard({ data }) {
+export default function ItemCard({ data, onAddToCart }) {
   const {
     name,
     model: Model,
@@ -47,8 +55,9 @@ export default function ItemCard({ data }) {
       className={classes.root}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
+      raised={hovered}
     >
-      <CardActionArea>
+      <CardActionArea onClick={onAddToCart}>
         <CardMedia className={classes.media} title={name}>
           <Canvas camera={{ fov: 50, position: [0, 0, 1] }}>
             <spotLight intensity={2.0} position={[10, 20, 20]} />
@@ -65,14 +74,23 @@ export default function ItemCard({ data }) {
         </CardMedia>
 
         <CardContent>
-          <Typography gutterBottom variant='h5' component='h2'>
-            {name}
-          </Typography>
+          <Grid container direction='row' alignItems='center'>
+            <Typography className={classes.name} variant='h5' component='h2'>
+              {name}
+            </Typography>
+            <Chip color='secondary' label='99' />
+          </Grid>
         </CardContent>
       </CardActionArea>
 
       <CardActions>
-        <Button size='small' color='primary'>
+        <Button
+          className={classes.addToCartBtn}
+          size='small'
+          color='primary'
+          variant='outlined'
+          onClick={onAddToCart}
+        >
           Add to cart
         </Button>
       </CardActions>
