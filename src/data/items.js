@@ -15,7 +15,7 @@ export default [
   {
     name: 'Double Burger',
     unitPrice: 4999,
-    units: 10,
+    units: 1,
     view: {
       model: m.BurgerDouble,
       position: [0, -0.25, 0],

@@ -1,61 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
-import CardGrid from './card-grid';
+import ItemCard from '../item-card';
 
 const useStyles = makeStyles(theme => ({
-  toast: {
-    [theme.breakpoints.down('xs')]: {
-      bottom: 90,
-    },
+  root: {
+    width: '100%',
+    margin: 0,
+    padding: theme.spacing(1),
   },
 }));
 
 export default function Gallery({ inventory, cart, onItemAddToCart }) {
   const classes = useStyles();
 
-  const [toast, setToast] = useState({
-    open: false,
-    text: '',
+  const keys = Object.keys(inventory);
+  const itemList = keys.map(key => inventory[key]);
+
+  const cards = itemList.map(x => {
+    const cartItem = cart[x.name];
+    const quantity = cartItem ? cartItem.quantity : 0;
+    const data = { ...x, quantity };
+    return (
+      <Grid key={x.name} item xl>
+        <ItemCard data={data} onAddToCart={() => onItemAddToCart(x.name)} />
+      </Grid>
+    );
   });
 
-  const { items, error } = inventory;
-  const { items: cartItems } = cart;
-
-  useEffect(() => {
-    if (error) {
-      setToast({ open: true, text: error.msg });
-    }
-  }, [error]);
-
-  const handleCloseError = () => {
-    setToast({ ...toast, open: false });
-  };
-
   return (
-    <>
-      <CardGrid
-        items={items}
-        cartItems={cartItems}
-        onItemAddToCart={onItemAddToCart}
-      />
-      <Snackbar
-        className={classes.toast}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={toast.open}
-        autoHideDuration={6000}
-        onClose={handleCloseError}
-        message={toast.text}
-        action={
-          <Button color='secondary' size='small' onClick={handleCloseError}>
-            Dismiss
-          </Button>
-        }
-      />
-    </>
+    <Grid className={classes.root} container spacing={2} justify='center'>
+      {cards}
+    </Grid>
   );
 }
