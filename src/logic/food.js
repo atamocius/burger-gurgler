@@ -1,5 +1,3 @@
-import data from '../data/items';
-
 //#region Actions
 const LOAD = 'food/LOAD';
 const ADD_TO_CART = 'food/ADD_TO_CART';
@@ -12,7 +10,7 @@ export const initialState = { inventory: {}, cart: {}, error: null };
 export function reducer(state = {}, action = {}) {
   switch (action.type) {
     case LOAD:
-      return handleLoad();
+      return handleLoad(action);
     case ADD_TO_CART:
       return handleAddToCart(state, action);
     case REMOVE_FROM_CART:
@@ -24,8 +22,8 @@ export function reducer(state = {}, action = {}) {
 //#endregion
 
 //#region Action Creators
-export function load() {
-  return { type: LOAD };
+export function load(data) {
+  return { type: LOAD, data };
 }
 
 export function addToCart(name) {
@@ -38,7 +36,7 @@ export function removeFromCart(name) {
 //#endregion
 
 //#region Action Logic
-function handleLoad() {
+function handleLoad({ data }) {
   return {
     error: null,
     cart: {},

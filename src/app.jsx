@@ -1,23 +1,15 @@
 import React, { useReducer, useEffect } from 'react';
 
-import {
-  makeStyles,
-  createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { red, orange } from '@material-ui/core/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
-import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
-
+import TitleBar from './components/title-bar';
 import Gallery from './components/gallery';
 import Cart from './components/cart';
 import StatusMessage from './components/status-message';
 
+import data from './data/items';
 import * as food from './logic/food';
 
 const theme = createMuiTheme({
@@ -34,15 +26,7 @@ const theme = createMuiTheme({
   },
 });
 
-const useStyles = makeStyles(theme => ({
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-}));
-
 export default function App() {
-  const classes = useStyles();
-
   const [foodState, foodDispatch] = useReducer(food.reducer, food.initialState);
 
   const handleCheckout = () => {
@@ -53,40 +37,33 @@ export default function App() {
     foodDispatch(food.addToCart(itemName));
   };
 
-  // Initialize inventory
+  // Initialize data
   useEffect(() => {
-    foodDispatch(food.load());
+    foodDispatch(food.load(data));
   }, []);
 
-  const keys = Object.keys(foodState.inventory);
-  keys.forEach(key => {
-    console.log(`${key}: ${foodState.inventory[key].units}`);
-  });
-  console.log(foodState);
+  const { inventory, cart, error } = foodState;
+
+  // const keys = Object.keys(foodState.inventory);
+  // keys.forEach(key => {
+  //   console.log(`${key}: ${foodState.inventory[key].units}`);
+  // });
+  // console.log(foodState);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
-      <AppBar position='sticky'>
-        <Toolbar>
-          <FastfoodRoundedIcon
-            color='secondary'
-            fontSize='large'
-            className={classes.extendedIcon}
-          />
-          <Typography variant='h6'>burgerGURGLER</Typography>
-        </Toolbar>
-      </AppBar>
+      <TitleBar />
 
       <Gallery
-        inventory={foodState.inventory}
-        cart={foodState.cart}
+        inventory={inventory}
+        cart={cart}
         onItemAddToCart={handleItemAddToCart}
       />
       <Cart onCheckout={handleCheckout} />
 
-      <StatusMessage msg={foodState.error} />
+      <StatusMessage msg={error} />
     </ThemeProvider>
   );
 }
