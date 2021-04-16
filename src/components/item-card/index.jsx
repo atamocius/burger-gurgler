@@ -16,7 +16,7 @@ import { Canvas } from '@react-three/fiber';
 
 import RotatingModel from './rotating-model';
 
-import { toAmountFormat } from '../../utils/formatting';
+import { toPesoFormat } from '../../utils/formatting';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,7 +90,7 @@ export default function ItemCard({ data, onAddToCart }) {
             {quantityView}
           </Grid>
           <Typography variant='body2' color='textSecondary' component='p'>
-            {toAmountFormat(unitPrice)}
+            {toPesoFormat(unitPrice)}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -61,7 +61,7 @@ export default function App() {
         cart={cart}
         onItemAddToCart={handleItemAddToCart}
       />
-      <Cart onCheckout={handleCheckout} />
+      <Cart items={cart} onCheckout={handleCheckout} />
 
       <StatusMessage msg={error} />
     </ThemeProvider>

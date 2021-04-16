@@ -63,7 +63,7 @@ function handleAddToCart(state, { name }) {
     name,
     unitPrice: inventoryItem.unitPrice,
     quantity: 0,
-    total: 0,
+    // total: 0,
   };
 
   // Check if there is still stock available
@@ -105,7 +105,6 @@ function handleAddToCart(state, { name }) {
 
         // Commit the changes
         quantity: cartItem.quantity + 1,
-        total: (cartItem.quantity + 1) * inventoryItem.unitPrice,
       },
     },
   };
@@ -176,7 +175,6 @@ function handleRemoveFromCart(state, { name }) {
 
         // Commit the changes
         quantity: cartItem.quantity - 1,
-        total: (cartItem.quantity - 1) * inventoryItem.unitPrice,
       },
     },
   };

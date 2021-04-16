@@ -17,7 +17,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Cart({ onCheckout }) {
+function toRows(items) {
+  const keys = Object.keys(items);
+  const rows = [];
+  const totalQuantity = keys.reduce((acc, key) => {
+    const item = items[key];
+    rows.push(item);
+    return acc + item.quantity;
+  }, 0);
+
+  return {
+    rows,
+    totalQuantity,
+  };
+}
+
+export default function Cart({ items, onCheckout }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 
@@ -34,8 +49,10 @@ export default function Cart({ onCheckout }) {
     onCheckout();
   };
 
-  return (
-    <>
+  const { rows, totalQuantity } = toRows(items);
+
+  const fab =
+    totalQuantity > 0 ? (
       <Fab
         className={classes.fab}
         variant='extended'
@@ -43,10 +60,15 @@ export default function Cart({ onCheckout }) {
         onClick={handleClickOpen}
       >
         <ShoppingCartIcon className={classes.extendedIcon} />
-        View Cart (3)
+        {`View Cart (${totalQuantity})`}
       </Fab>
+    ) : null;
 
+  return (
+    <>
+      {fab}
       <CartContents
+        rows={rows}
         open={open}
         onClose={handleClose}
         onCheckout={handleCheckout}

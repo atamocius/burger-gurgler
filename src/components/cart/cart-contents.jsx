@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -15,28 +15,24 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-const useStyles = makeStyles(theme => ({
+import { toPesoFormat } from '../../utils/formatting';
+
+const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-}));
+});
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function calcTotal(rows) {
+  return rows.reduce((acc, row) => acc + row.quantity * row.unitPrice, 0);
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function CartContents({ open, onClose, onCheckout }) {
+export default function CartContents({ rows, open, onClose, onCheckout }) {
   const classes = useStyles();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const total = calcTotal(rows);
 
   return (
     <Dialog
@@ -52,11 +48,10 @@ export default function CartContents({ open, onClose, onCheckout }) {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align='right'>Calories</TableCell>
-                <TableCell align='right'>Fat&nbsp;(g)</TableCell>
-                <TableCell align='right'>Carbs&nbsp;(g)</TableCell>
-                <TableCell align='right'>Protein&nbsp;(g)</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell align='right'>Unit&nbsp;Price</TableCell>
+                <TableCell align='right'>Quantity</TableCell>
+                <TableCell align='right'>Price</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,12 +60,23 @@ export default function CartContents({ open, onClose, onCheckout }) {
                   <TableCell component='th' scope='row'>
                     {row.name}
                   </TableCell>
-                  <TableCell align='right'>{row.calories}</TableCell>
-                  <TableCell align='right'>{row.fat}</TableCell>
-                  <TableCell align='right'>{row.carbs}</TableCell>
-                  <TableCell align='right'>{row.protein}</TableCell>
+                  <TableCell align='right'>
+                    {toPesoFormat(row.unitPrice)}
+                  </TableCell>
+                  <TableCell align='right'>{row.quantity}</TableCell>
+                  <TableCell align='right'>
+                    {toPesoFormat(row.quantity * row.unitPrice)}
+                  </TableCell>
                 </TableRow>
               ))}
+
+              <TableRow>
+                <TableCell colSpan={2} />
+                <TableCell colSpan={1} align='right'>
+                  Total
+                </TableCell>
+                <TableCell align='right'>{toPesoFormat(total)}</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
