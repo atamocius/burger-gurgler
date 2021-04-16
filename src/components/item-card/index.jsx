@@ -42,14 +42,16 @@ const defaults = {
 export default function ItemCard({ data, onAddToCart }) {
   const {
     name,
-    model: Model,
-    position = defaults.position,
-    scale = defaults.scale,
-    rotation = defaults.rotation,
+    price,
+    view: {
+      model: Model,
+      position = defaults.position,
+      scale = defaults.scale,
+      rotation = defaults.rotation,
+    },
   } = data;
 
-  const price = toAmountFormat(19999);
-  const quantity = `x ${10}`;
+  const quantity = 10;
 
   const classes = useStyles();
 
@@ -83,10 +85,10 @@ export default function ItemCard({ data, onAddToCart }) {
             <Typography className={classes.name} variant='h5' component='h2'>
               {name}
             </Typography>
-            <Chip color='secondary' label={quantity} />
+            <Chip color='secondary' label={`x ${quantity}`} />
           </Grid>
           <Typography variant='body2' color='textSecondary' component='p'>
-            {price}
+            {toAmountFormat(price)}
           </Typography>
         </CardContent>
       </CardActionArea>

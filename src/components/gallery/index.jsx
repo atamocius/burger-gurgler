@@ -1,31 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 
-import ItemCard from '../item-card';
+import CardGrid from './card-grid';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    margin: 0,
-    padding: theme.spacing(1),
+  toast: {
+    [theme.breakpoints.down('xs')]: {
+      bottom: 90,
+    },
   },
 }));
 
-export default function Gallery({ items, onItemAddToCart }) {
+export default function Gallery({ inventory, onItemAddToCart }) {
   const classes = useStyles();
 
-  const cards = items.map(x => (
-    <Grid key={x.name} item xl>
-      <ItemCard data={x} onAddToCart={() => onItemAddToCart(x.name)} />
-    </Grid>
-  ));
+  const [toast, setToast] = useState({
+    open: false,
+    text: '',
+  });
+
+  const { items, error } = inventory;
+
+  useEffect(() => {
+    if (error) {
+      setToast({ open: true, text: error.msg });
+    }
+  }, [error]);
+
+  const handleCloseError = () => {
+    setToast({ ...toast, open: false });
+  };
 
   return (
-    <Grid className={classes.root} container spacing={2} justify='center'>
-      {cards}
-    </Grid>
+    <>
+      <CardGrid items={items} onItemAddToCart={onItemAddToCart} />
+      <Snackbar
+        className={classes.toast}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={toast.open}
+        autoHideDuration={6000}
+        onClose={handleCloseError}
+        message={toast.text}
+        action={
+          <Button color='secondary' size='small' onClick={handleCloseError}>
+            Dismiss
+          </Button>
+        }
+      />
+    </>
   );
 }

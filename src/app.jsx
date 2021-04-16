@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 
 import {
   makeStyles,
@@ -17,7 +17,7 @@ import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import Gallery from './components/gallery';
 import Cart from './components/cart';
 
-import items from './data/items';
+import * as inventory from './logic/inventory';
 
 const theme = createMuiTheme({
   typography: {
@@ -43,15 +43,31 @@ const useStyles = makeStyles(theme => ({
 export default function App() {
   const classes = useStyles();
 
+  const [inventoryState, inventoryDispatch] = useReducer(
+    inventory.reducer,
+    inventory.initialState
+  );
+
   const handleCheckout = () => {
     console.log('CHECKOUT!');
   };
 
   const handleItemAddToCart = itemName => {
     console.log(itemName);
+
+    inventoryDispatch(inventory.removeStock(itemName));
+
+    console.log(inventoryState.error);
   };
 
-  // const metaItems = items.map(x => ({ quantity: 0, ...x }));
+  useEffect(() => {
+    inventoryDispatch(inventory.load());
+  }, []);
+
+  const keys = Object.keys(inventoryState.items);
+  keys.forEach(key => {
+    console.log(`${key}: ${inventoryState.items[key].units}`);
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,7 +84,10 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-      <Gallery items={items} onItemAddToCart={handleItemAddToCart} />
+      <Gallery
+        inventory={inventoryState}
+        onItemAddToCart={handleItemAddToCart}
+      />
       <Cart onCheckout={handleCheckout} />
     </ThemeProvider>
   );
