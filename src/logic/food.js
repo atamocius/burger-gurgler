@@ -63,7 +63,6 @@ function handleAddToCart(state, { name }) {
     name,
     unitPrice: inventoryItem.unitPrice,
     quantity: 0,
-    // total: 0,
   };
 
   // Check if there is still stock available
