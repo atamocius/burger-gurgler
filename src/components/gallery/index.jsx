@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Gallery({ inventory, onItemAddToCart }) {
+export default function Gallery({ inventory, cart, onItemAddToCart }) {
   const classes = useStyles();
 
   const [toast, setToast] = useState({
@@ -24,6 +24,7 @@ export default function Gallery({ inventory, onItemAddToCart }) {
   });
 
   const { items, error } = inventory;
+  const { items: cartItems } = cart;
 
   useEffect(() => {
     if (error) {
@@ -37,7 +38,11 @@ export default function Gallery({ inventory, onItemAddToCart }) {
 
   return (
     <>
-      <CardGrid items={items} onItemAddToCart={onItemAddToCart} />
+      <CardGrid
+        items={items}
+        cartItems={cartItems}
+        onItemAddToCart={onItemAddToCart}
+      />
       <Snackbar
         className={classes.toast}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}

@@ -18,6 +18,7 @@ import Gallery from './components/gallery';
 import Cart from './components/cart';
 
 import * as inventory from './logic/inventory';
+import * as cart from './logic/cart';
 
 const theme = createMuiTheme({
   typography: {
@@ -47,19 +48,31 @@ export default function App() {
     inventory.reducer,
     inventory.initialState
   );
+  const [cartState, cartDispatch] = useReducer(cart.reducer, cart.initialState);
 
   const handleCheckout = () => {
     console.log('CHECKOUT!');
   };
 
   const handleItemAddToCart = itemName => {
-    console.log(itemName);
+    // console.log(itemName);
 
     inventoryDispatch(inventory.removeStock(itemName));
 
-    console.log(inventoryState.error);
+    if (inventoryState.error) {
+      // TODO: Move error snackbar/toast here!
+      console.log('boom');
+      return;
+    }
+
+    const { unitPrice } = inventoryState.items[itemName];
+
+    cartDispatch(cart.addUnit(itemName, unitPrice));
+
+    // console.log(inventoryState.error);
   };
 
+  // Initialize inventory
   useEffect(() => {
     inventoryDispatch(inventory.load());
   }, []);
@@ -68,6 +81,7 @@ export default function App() {
   keys.forEach(key => {
     console.log(`${key}: ${inventoryState.items[key].units}`);
   });
+  console.log(cartState);
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,6 +100,7 @@ export default function App() {
 
       <Gallery
         inventory={inventoryState}
+        cart={cartState}
         onItemAddToCart={handleItemAddToCart}
       />
       <Cart onCheckout={handleCheckout} />

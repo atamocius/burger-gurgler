@@ -5,7 +5,7 @@ const REMOVE_ITEM = 'cart/REMOVE_ITEM';
 const CLEAR = 'cart/CLEAR';
 //#endregion
 
-export const initialState = { items: [], error: null };
+export const initialState = { items: {}, error: null };
 
 //#region Reducer
 export function reducer(state = {}, action = {}) {
@@ -25,12 +25,16 @@ export function reducer(state = {}, action = {}) {
 //#endregion
 
 //#region Action Creators
-export function addUnit(name) {
-  return { type: ADD_UNIT, name };
+export function addUnit(name, unitPrice) {
+  return { type: ADD_UNIT, name, unitPrice };
 }
 
 export function removeUnit(name) {
   return { type: REMOVE_UNIT, name };
+}
+
+export function removeItem(name) {
+  return { type: REMOVE_ITEM, name };
 }
 
 export function clear() {
@@ -39,36 +43,53 @@ export function clear() {
 //#endregion
 
 //#region Action Logic
-function handleAddUnit(state, { name, price }) {
-  const itemsCopy = state.items.slice();
-  const matchIndex = itemsCopy.findIndex(i => i.name === name);
+function handleAddUnit(state, { name, unitPrice }) {
+  const item = state.items[name];
 
-  if (matchIndex === -1) {
-    // Add a new entry if the item has not yet been previously added
-    itemsCopy.push({
-      name,
-      unitPrice,
-      quantity: 1,
-      total: price,
-    });
-  } else {
+  if (item) {
     // Just increase quantity and recalculate total if item already exists
-    const matchedItem = itemsCopy[matchIndex];
-    matchedItem.quantity++;
-    matchedItem.total = matchedItem.quantity * matchedItem.unitPrice;
+    const q = item.quantity + 1;
+    return {
+      error: null,
+      items: {
+        // Copy over unmodified items
+        ...state.items,
+
+        // Overwrite specific item
+        [name]: {
+          // Copy over unmodified properties
+          ...item,
+
+          // Commit the stock update
+          quantity: q,
+          total: q * item.unitPrice,
+        },
+      },
+    };
   }
 
+  // Add a new entry if the item has not yet been previously added
   return {
     error: null,
-    items: itemsCopy,
+    items: {
+      // Copy over unmodified items
+      ...state.items,
+
+      // Overwrite specific item
+      [name]: {
+        name,
+        unitPrice,
+        quantity: 1,
+        total: unitPrice,
+      },
+    },
   };
 }
 
 function handleRemoveUnit(state, { name }) {
-  const itemsCopy = state.items.slice();
-  const matchIndex = itemsCopy.findIndex(i => i.name === name);
+  const item = state.items[name];
 
-  if (matchIndex === -1) {
+  if (!item) {
     return {
       // Copy over everything
       ...state,
@@ -80,30 +101,43 @@ function handleRemoveUnit(state, { name }) {
     };
   }
 
-  const matchedItem = itemsCopy[matchIndex];
-
-  const draftQuantity = matchedItem.quantity - 1;
+  const draftQuantity = item.quantity - 1;
 
   if (draftQuantity <= 0) {
+    const { [name]: value, ...otherItems } = state.items;
     // Remove the entry if the quantity is going to be <= 0
-    itemsCopy.splice(matchIndex, 1);
+    return {
+      error: null,
+      items: {
+        ...otherItems,
+      },
+    };
   } else {
     // Just decrease quantity and recalculate total
-    matchedItem.quantity--;
-    matchedItem.total = matchedItem.quantity * matchedItem.unitPrice;
-  }
+    return {
+      error: null,
+      items: {
+        // Copy over unmodified items
+        ...state.items,
 
-  return {
-    error: null,
-    items: itemsCopy,
-  };
+        // Overwrite specific item
+        [name]: {
+          // Copy over unmodified properties
+          ...item,
+
+          // Commit the quantity update
+          quantity: draftQuantity,
+          total: draftQuantity * item.unitPrice,
+        },
+      },
+    };
+  }
 }
 
 function handleRemoveItem(state, { name }) {
-  const itemsCopy = state.items.slice();
-  const matchIndex = itemsCopy.findIndex(i => i.name === name);
+  const item = state.items[name];
 
-  if (matchIndex === -1) {
+  if (!item) {
     return {
       // Copy over everything
       ...state,
@@ -115,11 +149,13 @@ function handleRemoveItem(state, { name }) {
     };
   }
 
-  itemsCopy.splice(matchIndex, 1);
-
+  const { [name]: value, ...otherItems } = state.items;
+  // Remove the entry if the quantity is going to be <= 0
   return {
     error: null,
-    items: itemsCopy,
+    items: {
+      ...otherItems,
+    },
   };
 }
 

@@ -44,7 +44,7 @@ function handleLoad() {
     items: data.reduce((map, item) => {
       map[item.name] = {
         name: item.name,
-        price: item.price,
+        unitPrice: item.unitPrice,
         units: item.units,
         view: {
           model: item.view.model,

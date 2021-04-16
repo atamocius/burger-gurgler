@@ -14,17 +14,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CardGrid({ items, onItemAddToCart }) {
+export default function CardGrid({ items, cartItems, onItemAddToCart }) {
   const classes = useStyles();
 
   const keys = Object.keys(items);
   const itemList = keys.map(key => items[key]);
 
-  const cards = itemList.map(x => (
-    <Grid key={x.name} item xl>
-      <ItemCard data={x} onAddToCart={() => onItemAddToCart(x.name)} />
-    </Grid>
-  ));
+  const cards = itemList.map(x => {
+    const cartItem = cartItems[x.name];
+    const quantity = cartItem ? cartItem.quantity : 0;
+    const data = { ...x, quantity };
+    return (
+      <Grid key={x.name} item xl>
+        <ItemCard data={data} onAddToCart={() => onItemAddToCart(x.name)} />
+      </Grid>
+    );
+  });
 
   return (
     <Grid className={classes.root} container spacing={2} justify='center'>

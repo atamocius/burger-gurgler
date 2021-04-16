@@ -3,7 +3,7 @@ import * as m from '../components/models';
 export default [
   {
     name: 'Burger',
-    price: 2449,
+    unitPrice: 2449,
     units: 10,
     view: {
       model: m.Burger,
@@ -14,7 +14,7 @@ export default [
   },
   {
     name: 'Double Burger',
-    price: 4999,
+    unitPrice: 4999,
     units: 10,
     view: {
       model: m.BurgerDouble,
@@ -25,7 +25,7 @@ export default [
   },
   {
     name: 'Pizza',
-    price: 9999,
+    unitPrice: 9999,
     units: 10,
     view: {
       model: m.Pizza,
@@ -33,7 +33,7 @@ export default [
   },
   {
     name: 'Taco',
-    price: 1999,
+    unitPrice: 1999,
     units: 10,
     view: {
       model: m.Taco,
@@ -44,7 +44,7 @@ export default [
   },
   {
     name: 'Cake',
-    price: 19949,
+    unitPrice: 19949,
     units: 10,
     view: {
       model: m.CakeBirthday,
@@ -53,7 +53,7 @@ export default [
   },
   {
     name: 'Donut',
-    price: 949,
+    unitPrice: 949,
     units: 10,
     view: {
       model: m.DonutSprinkles,
@@ -64,7 +64,7 @@ export default [
   },
   {
     name: 'Mocha Frappe',
-    price: 11999,
+    unitPrice: 11999,
     units: 10,
     view: {
       model: m.Frappe,
