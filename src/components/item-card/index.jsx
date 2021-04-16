@@ -16,6 +16,8 @@ import { Canvas } from '@react-three/fiber';
 
 import RotatingModel from './rotating-model';
 
+import { toAmountFormat } from '../../utils/formatting';
+
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 260,
@@ -37,11 +39,6 @@ const defaults = {
   rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
 };
 
-// TODO: Move to utils
-function toDisplayAmount(cents) {
-  return `₱ ${(cents / 100).toFixed(2)}`;
-}
-
 export default function ItemCard({ data, onAddToCart }) {
   const {
     name,
@@ -51,7 +48,7 @@ export default function ItemCard({ data, onAddToCart }) {
     rotation = defaults.rotation,
   } = data;
 
-  const price = toDisplayAmount(19999);
+  const price = toAmountFormat(19999);
   const quantity = `x ${10}`;
 
   const classes = useStyles();
