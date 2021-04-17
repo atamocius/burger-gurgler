@@ -17,12 +17,15 @@ export default function PhysicalFood({
 
   switch (collider) {
     case 'box':
+      // args: [x, y, z]
       boundingType = useBox;
       break;
     case 'sphere':
+      // args: radius
       boundingType = useSphere;
       break;
     case 'cylinder':
+      // args: [radiusTop, radiusBottom, height, numSegments]
       boundingType = useCylinder;
       break;
     default:
