@@ -3,8 +3,8 @@ import React from 'react';
 import { useBox, useSphere, useCylinder } from '@react-three/cannon';
 
 export default function PhysicalFood({
-  type,
-  args,
+  collider,
+  colliderArgs,
   mass = 1,
   position = [0, 7, 0],
   rotation = [0.4, 0.2, 0.5],
@@ -15,7 +15,7 @@ export default function PhysicalFood({
 }) {
   let boundingType;
 
-  switch (type) {
+  switch (collider) {
     case 'box':
       boundingType = useBox;
       break;
@@ -26,12 +26,12 @@ export default function PhysicalFood({
       boundingType = useCylinder;
       break;
     default:
-      new Error(`Unsupported PhysicsModel type ${type}`);
+      new Error(`Unsupported PhysicsModel type ${collider}`);
   }
 
   const [ref] = boundingType(() => ({
     mass,
-    args,
+    args: colliderArgs,
     position,
     rotation,
   }));
@@ -46,18 +46,22 @@ export default function PhysicalFood({
 
   let bufferGeom;
 
-  switch (type) {
+  switch (collider) {
     case 'box':
-      bufferGeom = <boxBufferGeometry attach='geometry' args={args} />;
+      bufferGeom = <boxBufferGeometry attach='geometry' args={colliderArgs} />;
       break;
     case 'sphere':
-      bufferGeom = <sphereBufferGeometry attach='geometry' args={args} />;
+      bufferGeom = (
+        <sphereBufferGeometry attach='geometry' args={colliderArgs} />
+      );
       break;
     case 'cylinder':
-      bufferGeom = <cylinderBufferGeometry attach='geometry' args={args} />;
+      bufferGeom = (
+        <cylinderBufferGeometry attach='geometry' args={colliderArgs} />
+      );
       break;
     default:
-      new Error(`Unsupported PhysicsModel type ${type}`);
+      new Error(`Unsupported PhysicsModel type ${collider}`);
   }
 
   return (

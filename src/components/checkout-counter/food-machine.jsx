@@ -17,8 +17,8 @@ function PhysBurger({ position, rotation, debug }) {
       model={Burger}
       modelScale={3.7}
       modelPosition={[0, -0.5, 0]}
-      type='cylinder'
-      args={[0.62, 0.62, 0.93]}
+      collider='cylinder'
+      colliderArgs={[0.62, 0.62, 0.93]}
       position={position}
       rotation={rotation}
     />
@@ -43,8 +43,8 @@ export default function FoodMachine({}) {
             model={Burger}
             modelScale={3.7}
             modelPosition={[0, -0.5, 0]}
-            type='cylinder'
-            args={[0.62, 0.62, 0.93]}
+            collider='cylinder'
+            colliderArgs={[0.62, 0.62, 0.93]}
           />
           <PhysBurger position={[0, 10, -2]} debug />
           <PhysBurger position={[0, 20, -2]} />
