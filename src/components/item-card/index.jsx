@@ -41,19 +41,6 @@ const defaults = {
   rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
 };
 
-function Lighting() {
-  return (
-    <>
-      {/* Key */}
-      <spotLight intensity={1.0} position={[-2, 0, 5]} color='#ffa4ad' />
-      {/* Fill */}
-      <spotLight intensity={1.6} position={[2, 1, 4]} color='#ffdee1' />
-      {/* Rim */}
-      <spotLight intensity={1.8} position={[1, 4, -2]} color='#fff5ab' />
-    </>
-  );
-}
-
 export default function ItemCard({ data, onAddToCart }) {
   const {
     name,
@@ -121,5 +108,18 @@ export default function ItemCard({ data, onAddToCart }) {
         </Button>
       </CardActions>
     </Card>
+  );
+}
+
+function Lighting() {
+  return (
+    <>
+      {/* Key */}
+      <spotLight intensity={1.0} position={[-2, 0, 5]} color='#ffa4ad' />
+      {/* Fill */}
+      <spotLight intensity={1.6} position={[2, 1, 4]} color='#ffdee1' />
+      {/* Rim */}
+      <spotLight intensity={1.8} position={[1, 4, -2]} color='#fff5ab' />
+    </>
   );
 }

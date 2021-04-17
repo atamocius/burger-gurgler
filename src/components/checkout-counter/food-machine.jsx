@@ -1,47 +1,56 @@
 import React, { Suspense } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { Physics } from '@react-three/cannon';
 
-import Burder from '../models/Burger';
+import SceneLighting from './scene-lighting';
+import Floor from './floor';
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-}));
+import PhysicalFood from './physical-food';
+import Burger from '../models/Burger';
 
-function Lighting() {
+function PhysBurger({ position, rotation, debug }) {
   return (
-    <>
-      <ambientLight intensity={1.35} />
-
-      {/* Key */}
-      <spotLight intensity={1.0} position={[-2, 0, 5]} color='#ffa4ad' />
-      {/* Fill */}
-      <spotLight intensity={1.6} position={[2, 1, 4]} color='#ffdee1' />
-      {/* Rim */}
-      <spotLight intensity={1.8} position={[1, 4, -2]} color='#fff5ab' />
-    </>
+    <PhysicalFood
+      debug={debug}
+      model={Burger}
+      modelScale={3.7}
+      modelPosition={[0, -0.5, 0]}
+      type='cylinder'
+      args={[0.62, 0.62, 0.93]}
+      position={position}
+      rotation={rotation}
+    />
   );
 }
 
 export default function FoodMachine({}) {
   return (
-    <Canvas camera={{ fov: 50, position: [0, 0, 1] }}>
-      <color attach='background' args={['#ffebcf']} />
-
-      {/* <hemisphereLight intensity={0.35} />
-      <spotLight intensity={2.0} position={[10, 20, 20]} />
-      <spotLight intensity={1.0} position={[0, 0, 10]} /> */}
-
-      <Lighting />
+    <Canvas
+      shadows
+      gl={{ alpha: false }}
+      camera={{ fov: 90, position: [0, 7, 10] }}
+      // camera={{ fov: 50, position: [0, 0, 1] }}
+    >
+      <SceneLighting />
 
       <Suspense fallback={null}>
-        {/* <group position={position} scale={scale} rotation={rotation}> */}
-        <Burder />
-        {/* </group> */}
+        <Physics>
+          <Floor />
+
+          <PhysicalFood
+            model={Burger}
+            modelScale={3.7}
+            modelPosition={[0, -0.5, 0]}
+            type='cylinder'
+            args={[0.62, 0.62, 0.93]}
+          />
+          <PhysBurger position={[0, 10, -2]} debug />
+          <PhysBurger position={[0, 20, -2]} />
+        </Physics>
       </Suspense>
+
       <OrbitControls />
     </Canvas>
   );
