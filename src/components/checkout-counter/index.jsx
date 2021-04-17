@@ -39,10 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction='up' ref={ref} {...props} />;
-});
-
 export default function CheckoutCounter({ open, onExit }) {
   const classes = useStyles();
 
@@ -90,3 +86,7 @@ export default function CheckoutCounter({ open, onExit }) {
     </Dialog>
   );
 }
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction='up' ref={ref} {...props} />;
+});

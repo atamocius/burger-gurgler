@@ -9,7 +9,7 @@ export default [
       model: m.Burger,
       position: [0, -0.2, 0],
       scale: 1.7,
-      rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.0],
+      rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.02],
     },
   },
   {
@@ -20,7 +20,7 @@ export default [
       model: m.BurgerDouble,
       position: [0, -0.25, 0],
       scale: 1.7,
-      rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.0],
+      rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.02],
     },
   },
   {

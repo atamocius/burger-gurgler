@@ -24,6 +24,8 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 220,
+    background:
+      'radial-gradient(circle, rgba(255,230,194,1) 0%, rgba(255,167,38,1) 100%)',
   },
   name: {
     marginRight: theme.spacing(1),
@@ -38,6 +40,19 @@ const defaults = {
   scale: 1,
   rotation: [Math.PI * 0.1, Math.PI * 0.3, Math.PI * 0.07],
 };
+
+function Lighting() {
+  return (
+    <>
+      {/* Key */}
+      <spotLight intensity={1.0} position={[-2, 0, 5]} color='#ffa4ad' />
+      {/* Fill */}
+      <spotLight intensity={1.6} position={[2, 1, 4]} color='#ffdee1' />
+      {/* Rim */}
+      <spotLight intensity={1.8} position={[1, 4, -2]} color='#fff5ab' />
+    </>
+  );
+}
 
 export default function ItemCard({ data, onAddToCart }) {
   const {
@@ -69,8 +84,7 @@ export default function ItemCard({ data, onAddToCart }) {
       <CardActionArea onClick={onAddToCart}>
         <CardMedia className={classes.media} title={name}>
           <Canvas camera={{ fov: 50, position: [0, 0, 1] }}>
-            <spotLight intensity={2.0} position={[10, 20, 20]} />
-            <spotLight intensity={1.0} position={[0, 0, 10]} />
+            <Lighting />
 
             <Suspense fallback={null}>
               <RotatingModel animate={hovered}>
@@ -100,7 +114,7 @@ export default function ItemCard({ data, onAddToCart }) {
           className={classes.addToCartBtn}
           size='small'
           color='primary'
-          variant='outlined'
+          variant='contained'
           onClick={onAddToCart}
         >
           Add to cart
