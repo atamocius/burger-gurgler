@@ -37,6 +37,14 @@ export default function App() {
     foodDispatch(food.addToCart(itemName));
   };
 
+  const handleAddUnitToCart = itemName => {
+    foodDispatch(food.addToCart(itemName));
+  };
+
+  const handleRemoveUnitFromCart = itemName => {
+    foodDispatch(food.removeFromCart(itemName));
+  };
+
   // Initialize data
   useEffect(() => {
     foodDispatch(food.load(data));
@@ -61,7 +69,12 @@ export default function App() {
         cart={cart}
         onItemAddToCart={handleItemAddToCart}
       />
-      <Cart items={cart} onCheckout={handleCheckout} />
+      <Cart
+        items={cart}
+        onCheckout={handleCheckout}
+        onAddUnit={handleAddUnitToCart}
+        onRemoveUnit={handleRemoveUnitFromCart}
+      />
 
       <StatusMessage msg={error} />
     </ThemeProvider>

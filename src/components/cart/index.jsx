@@ -17,22 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function toRows(items) {
-  const keys = Object.keys(items);
-  const rows = [];
-  const totalQuantity = keys.reduce((acc, key) => {
-    const item = items[key];
-    rows.push(item);
-    return acc + item.quantity;
-  }, 0);
-
-  return {
-    rows,
-    totalQuantity,
-  };
-}
-
-export default function Cart({ items, onCheckout }) {
+export default function Cart({ items, onCheckout, onAddUnit, onRemoveUnit }) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 
@@ -72,7 +57,24 @@ export default function Cart({ items, onCheckout }) {
         open={open}
         onClose={handleClose}
         onCheckout={handleCheckout}
+        onAddUnit={onAddUnit}
+        onRemoveUnit={onRemoveUnit}
       />
     </>
   );
+}
+
+function toRows(items) {
+  const keys = Object.keys(items);
+  const rows = [];
+  const totalQuantity = keys.reduce((acc, key) => {
+    const item = items[key];
+    rows.push(item);
+    return acc + item.quantity;
+  }, 0);
+
+  return {
+    rows,
+    totalQuantity,
+  };
 }
