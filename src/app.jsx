@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { red, orange } from '@material-ui/core/colors';
@@ -8,6 +8,7 @@ import TitleBar from './components/title-bar';
 import Gallery from './components/gallery';
 import Cart from './components/cart';
 import StatusMessage from './components/status-message';
+import CheckoutCounter from './components/checkout-counter';
 
 import data from './data/items';
 import * as food from './logic/food';
@@ -27,10 +28,17 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
+  const [checkooutOpen, setCheckoutOpen] = useState(false);
   const [foodState, foodDispatch] = useReducer(food.reducer, food.initialState);
 
   const handleCheckout = () => {
     console.log('CHECKOUT!');
+    setCheckoutOpen(true);
+  };
+
+  const handleExitCheckout = () => {
+    console.log('DONE!');
+    setCheckoutOpen(false);
   };
 
   const handleItemAddToCart = itemName => {
@@ -75,6 +83,7 @@ export default function App() {
         onAddUnit={handleAddUnitToCart}
         onRemoveUnit={handleRemoveUnitFromCart}
       />
+      <CheckoutCounter open={checkooutOpen} onExit={handleExitCheckout} />
 
       <StatusMessage msg={error} />
     </ThemeProvider>
