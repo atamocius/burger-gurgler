@@ -29,9 +29,7 @@ function Lighting() {
 export default function FoodMachine({}) {
   return (
     <Canvas camera={{ fov: 50, position: [0, 0, 1] }}>
-      {/* <color attach='background' args={['#222220']} /> */}
-      {/* <color attach='background' args={[theme.palette.secondary.main]} /> */}
-      {/* <color attach='background' args={['#ffe0b1']} /> */}
+      <color attach='background' args={['#ffebcf']} />
 
       {/* <hemisphereLight intensity={0.35} />
       <spotLight intensity={2.0} position={[10, 20, 20]} />

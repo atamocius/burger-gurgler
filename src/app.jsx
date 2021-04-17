@@ -18,6 +18,9 @@ const theme = createMuiTheme({
     fontFamily: 'Inter, sans-serif',
   },
   palette: {
+    background: {
+      default: '#ffebcf',
+    },
     primary: {
       main: red[700],
     },
