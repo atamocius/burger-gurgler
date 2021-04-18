@@ -27,20 +27,8 @@ function PhysBurger({ position, rotation, debug }) {
     />
   );
 }
+
 const DEBUG = false;
-
-function* orderQueue(cart) {
-  const items = Object.entries(cart).flatMap(c => {
-    const { name, quantity, physics } = c[1];
-    return Array.from({ length: quantity }, (_, i) => (
-      <PhysicalFood key={`${name}_${i}`} debug={DEBUG} {...physics} />
-    ));
-  });
-
-  for (let i = 0; i <= items.length; i++) {
-    yield items[i];
-  }
-}
 
 export default function FoodMachine({ cart, drop }) {
   const [items, setItems] = useState([]);
@@ -50,7 +38,7 @@ export default function FoodMachine({ cart, drop }) {
       return;
     }
 
-    for (let value of orderQueue(cart)) {
+    for (let value of orderSequence(cart)) {
       setItems(prevItems => [...prevItems, value]);
       await new Promise(resolve => setTimeout(resolve, 600));
     }
@@ -60,7 +48,7 @@ export default function FoodMachine({ cart, drop }) {
     <Canvas
       shadows
       gl={{ alpha: false }}
-      camera={{ fov: 70, position: [0, 7, 10] }}
+      camera={{ fov: 65, position: [0, 7, 10] }}
       // camera={{ fov: 50, position: [0, 0, 1] }}
     >
       <SceneLighting />
@@ -78,4 +66,16 @@ export default function FoodMachine({ cart, drop }) {
       <OrbitControls target={new Vector3(0, 3, 0)} />
     </Canvas>
   );
+}
+
+function* orderSequence(cart) {
+  const items = Object.values(cart).flatMap(({ name, quantity, physics }) =>
+    Array.from({ length: quantity }, (_, i) => (
+      <PhysicalFood key={`${name}_${i}`} debug={DEBUG} {...physics} />
+    ))
+  );
+
+  for (let i = 0; i <= items.length; i++) {
+    yield items[i];
+  }
 }

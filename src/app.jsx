@@ -37,13 +37,13 @@ export default function App() {
   const [foodState, foodDispatch] = useReducer(food.reducer, food.initialState);
 
   const handleCheckout = () => {
-    console.log('CHECKOUT!');
     setCheckoutOpen(true);
   };
 
   const handleExitCheckout = () => {
-    console.log('DONE!');
     setCheckoutOpen(false);
+    // Reset everything
+    foodDispatch(food.load(data));
   };
 
   const handleItemAddToCart = itemName => {
@@ -64,12 +64,6 @@ export default function App() {
   }, []);
 
   const { inventory, cart, error } = foodState;
-
-  // const keys = Object.keys(foodState.inventory);
-  // keys.forEach(key => {
-  //   console.log(`${key}: ${foodState.inventory[key].units}`);
-  // });
-  // console.log(foodState);
 
   return (
     <ThemeProvider theme={theme}>

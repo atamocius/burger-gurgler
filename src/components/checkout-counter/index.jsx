@@ -45,8 +45,12 @@ export default function CheckoutCounter({ cart, open, onExit }) {
   const [dropOrder, setDropOrder] = useState(false);
 
   const handleClaimOrder = () => {
-    console.log('CLAIM ORDER!!');
     setDropOrder(true);
+  };
+
+  const handleExit = () => {
+    setDropOrder(false);
+    onExit();
   };
 
   const fab = dropOrder ? null : (
@@ -67,7 +71,7 @@ export default function CheckoutCounter({ cart, open, onExit }) {
     <Dialog
       fullScreen
       open={open}
-      onClose={onExit}
+      onClose={handleExit}
       TransitionComponent={Transition}
     >
       <AppBar className={classes.appBar}>
@@ -78,7 +82,7 @@ export default function CheckoutCounter({ cart, open, onExit }) {
           <IconButton
             edge='start'
             color='inherit'
-            onClick={onExit}
+            onClick={handleExit}
             aria-label='close'
           >
             <CloseIcon />

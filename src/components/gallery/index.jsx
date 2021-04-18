@@ -17,10 +17,7 @@ const useStyles = makeStyles(theme => ({
 export default function Gallery({ inventory, cart, onItemAddToCart }) {
   const classes = useStyles();
 
-  const keys = Object.keys(inventory);
-  const itemList = keys.map(key => inventory[key]);
-
-  const cards = itemList.map(x => {
+  const cards = Object.values(inventory).map(x => {
     const cartItem = cart[x.name];
     const quantity = cartItem ? cartItem.quantity : 0;
     const data = { ...x, quantity };
