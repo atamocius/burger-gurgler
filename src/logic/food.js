@@ -46,10 +46,7 @@ function handleLoad({ data }) {
         unitPrice: item.unitPrice,
         units: item.units,
         view: {
-          model: item.view.model,
-          position: item.view.position,
-          scale: item.view.scale,
-          rotation: item.view.rotation,
+          ...item.view,
         },
       };
       return map;
@@ -63,6 +60,10 @@ function handleAddToCart(state, { name }) {
     name,
     unitPrice: inventoryItem.unitPrice,
     quantity: 0,
+    physics: {
+      model: inventoryItem.view.model,
+      ...inventoryItem.view.physics,
+    },
   };
 
   // Check if there is still stock available

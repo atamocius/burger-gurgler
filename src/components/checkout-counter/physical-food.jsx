@@ -6,10 +6,10 @@ export default function PhysicalFood({
   collider,
   colliderArgs,
   mass = 1,
-  position = [0, 7, 0],
+  position = [0, 12, 0],
   rotation = [0.4, 0.2, 0.5],
   model: Model,
-  modelScale,
+  modelScale = 4,
   modelPosition,
   debug,
 }) {
@@ -29,7 +29,7 @@ export default function PhysicalFood({
       boundingType = useCylinder;
       break;
     default:
-      new Error(`Unsupported PhysicsModel type ${collider}`);
+      throw new Error(`Unsupported PhysicsModel type '${collider}'`);
   }
 
   const [ref] = boundingType(() => ({
@@ -39,14 +39,19 @@ export default function PhysicalFood({
     rotation,
   }));
 
-  if (!debug) {
-    return (
-      <group ref={ref}>
-        <Model scale={modelScale} position={modelPosition} />
-      </group>
-    );
-  }
+  const wf = debug ? (
+    <WireframeMesh collider={collider} colliderArgs={colliderArgs} noDepth />
+  ) : null;
 
+  return (
+    <group ref={ref}>
+      <Model scale={modelScale} position={modelPosition} />
+      {wf}
+    </group>
+  );
+}
+
+function WireframeMesh({ collider, colliderArgs, noDepth }) {
   let bufferGeom;
 
   switch (collider) {
@@ -64,21 +69,18 @@ export default function PhysicalFood({
       );
       break;
     default:
-      new Error(`Unsupported PhysicsModel type ${collider}`);
+      bufferGeom = null;
   }
 
   return (
-    <group ref={ref}>
-      <Model renderOrder={0} scale={modelScale} position={modelPosition} />
-      <mesh renderOrder={1}>
-        {bufferGeom}
-        <meshStandardMaterial
-          wireframe
-          attach='material'
-          color='blue'
-          depthTest={false}
-        />
-      </mesh>
-    </group>
+    <mesh renderOrder={1}>
+      {bufferGeom}
+      <meshStandardMaterial
+        wireframe
+        attach='material'
+        color='blue'
+        depthTest={!noDepth}
+      />
+    </mesh>
   );
 }

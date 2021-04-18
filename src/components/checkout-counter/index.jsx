@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,12 +39,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CheckoutCounter({ open, onExit }) {
+export default function CheckoutCounter({ cart, open, onExit }) {
   const classes = useStyles();
+
+  const [dropOrder, setDropOrder] = useState(false);
 
   const handleClaimOrder = () => {
     console.log('CLAIM ORDER!!');
+    setDropOrder(true);
   };
+
+  const fab = dropOrder ? null : (
+    <div className={classes.fabContainer}>
+      <Fab
+        className={classes.fab}
+        variant='extended'
+        color='secondary'
+        onClick={handleClaimOrder}
+      >
+        <FastfoodRoundedIcon className={classes.extendedIcon} />
+        Claim Order
+      </Fab>
+    </div>
+  );
 
   return (
     <Dialog
@@ -70,18 +87,8 @@ export default function CheckoutCounter({ open, onExit }) {
       </AppBar>
 
       <div className={classes.counter}>
-        <FoodMachine />
-        <div className={classes.fabContainer}>
-          <Fab
-            className={classes.fab}
-            variant='extended'
-            color='secondary'
-            onClick={handleClaimOrder}
-          >
-            <FastfoodRoundedIcon className={classes.extendedIcon} />
-            Claim Order
-          </Fab>
-        </div>
+        <FoodMachine cart={cart} drop={dropOrder} />
+        {fab}
       </div>
     </Dialog>
   );
