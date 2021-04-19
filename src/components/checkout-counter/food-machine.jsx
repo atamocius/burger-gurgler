@@ -9,27 +9,10 @@ import SceneLighting from './scene-lighting';
 import Floor from './floor';
 
 import PhysicalFood from './physical-food';
-// import MMM from '../models/Salad';
-
-// function PhysBurger({ position, rotation, debug }) {
-//   return (
-//     <PhysicalFood
-//       debug={debug}
-//       model={MMM}
-//       position={position}
-//       rotation={rotation}
-//       /////
-//       mass={1}
-//       collider='cylinder'
-//       colliderArgs={[1.12, 0.82, 0.94]}
-//       modelScale={4}
-//       modelPosition={[0, -0.48, 0]}
-//       modelRotation={[0, 0, 0]}
-//     />
-//   );
-// }
 
 const DEBUG = false;
+
+const camTarget = new Vector3(0, 3, 0);
 
 export default function FoodMachine({ cart, drop }) {
   const [items, setItems] = useState([]);
@@ -50,22 +33,17 @@ export default function FoodMachine({ cart, drop }) {
       shadows
       gl={{ alpha: false }}
       camera={{ fov: 65, position: [0, 7, 10] }}
-      // camera={{ fov: 50, position: [0, 0, 1] }}
     >
       <SceneLighting />
 
       <Suspense fallback={null}>
         <Physics>
           <Floor />
-
-          {/* <PhysBurger debug={DEBUG} position={[0, 2, 0]} rotation={[0, 0, 0]} /> */}
-
           {items}
         </Physics>
       </Suspense>
 
-      <OrbitControls target={new Vector3(0, 3, 0)} />
-      {/* <OrbitControls /> */}
+      <OrbitControls target={camTarget} />
     </Canvas>
   );
 }
