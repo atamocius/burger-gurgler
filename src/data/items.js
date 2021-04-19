@@ -45,7 +45,7 @@ export default [
         collider: 'cylinder',
         colliderArgs: [0.32, 0.32, 2.0],
         modelPosition: [0.33, 0, 0],
-        modelRotation: [0, 0, 1.57],
+        modelRotation: [0, 0, Math.PI * 0.5],
       },
     },
   },
