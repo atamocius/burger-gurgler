@@ -35,10 +35,12 @@ export default [
   },
   {
     name: 'Hot Dog',
-    unitPrice: 0,
+    unitPrice: 1949,
     units: 10,
     view: {
       model: m.HotDog,
+      scale: 1.6,
+      rotation: [Math.PI * 0.2, Math.PI * 0.34, Math.PI * 0.05],
       physics: {
         collider: 'cylinder',
         colliderArgs: [0.32, 0.32, 2.0],
@@ -53,6 +55,9 @@ export default [
     units: 10,
     view: {
       model: m.Pizza,
+      position: [0, 0.05, 0],
+      scale: 1.1,
+      rotation: [Math.PI * 0.15, Math.PI * 0.3, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [1.68, 1.68, 0.16],
@@ -62,10 +67,13 @@ export default [
   },
   {
     name: 'Fries',
-    unitPrice: 0,
+    unitPrice: 1499,
     units: 10,
     view: {
       model: m.Fries,
+      position: [0, -0.29, 0],
+      scale: 1.6,
+      rotation: [Math.PI * 0.0, Math.PI * 0.41, Math.PI * 0.09],
       physics: {
         collider: 'box',
         colliderArgs: [0.58, 1.15, 0.95],
@@ -79,7 +87,7 @@ export default [
     units: 10,
     view: {
       model: m.Taco,
-      position: [0, -0.08, 0],
+      position: [0, -0.04, 0],
       scale: 1.5,
       rotation: [Math.PI * 0.3, Math.PI * 0.35, Math.PI * 0.07],
       physics: {
