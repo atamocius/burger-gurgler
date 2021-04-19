@@ -11,10 +11,8 @@ export default [
       scale: 1.7,
       rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.02],
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [0.65, 0.69, 1.05],
-        modelScale: 4,
         modelPosition: [0, -0.54, 0],
       },
     },
@@ -22,18 +20,30 @@ export default [
   {
     name: 'Double Burger',
     unitPrice: 4999,
-    units: 1,
+    units: 10,
     view: {
       model: m.BurgerDouble,
       position: [0, -0.25, 0],
       scale: 1.7,
       rotation: [Math.PI * 0.05, Math.PI * 0.3, Math.PI * 0.02],
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [0.65, 0.69, 1.33],
-        modelScale: 4,
         modelPosition: [0, -0.68, 0],
+      },
+    },
+  },
+  {
+    name: 'Hot Dog',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.HotDog,
+      physics: {
+        collider: 'cylinder',
+        colliderArgs: [0.32, 0.32, 2.0],
+        modelPosition: [0.33, 0, 0],
+        modelRotation: [0, 0, 1.57],
       },
     },
   },
@@ -44,11 +54,22 @@ export default [
     view: {
       model: m.Pizza,
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [1.68, 1.68, 0.16],
-        modelScale: 4,
         modelPosition: [0, -0.09, 0],
+      },
+    },
+  },
+  {
+    name: 'Fries',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Fries,
+      physics: {
+        collider: 'box',
+        colliderArgs: [0.58, 1.15, 0.95],
+        modelPosition: [0, -0.58, 0],
       },
     },
   },
@@ -62,11 +83,22 @@ export default [
       scale: 1.5,
       rotation: [Math.PI * 0.3, Math.PI * 0.35, Math.PI * 0.07],
       physics: {
-        mass: 1,
         collider: 'box',
         colliderArgs: [1.45, 0.97, 0.45],
-        modelScale: 4,
         modelPosition: [0, -0.5, 0],
+      },
+    },
+  },
+  {
+    name: 'Salad',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Salad,
+      physics: {
+        collider: 'cylinder',
+        colliderArgs: [1.12, 0.82, 0.94],
+        modelPosition: [0, -0.48, 0],
       },
     },
   },
@@ -78,10 +110,8 @@ export default [
       model: m.CakeBirthday,
       position: [0, -0.1, 0],
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [1.27, 1.27, 1.0],
-        modelScale: 4,
         modelPosition: [0, -0.52, 0],
       },
     },
@@ -96,11 +126,22 @@ export default [
       scale: 2.5,
       rotation: [Math.PI * 0.1, Math.PI * 0.4, Math.PI * 0.07],
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [0.5, 0.5, 0.33],
-        modelScale: 4,
         modelPosition: [0, -0.18, 0],
+      },
+    },
+  },
+  {
+    name: 'Sundae',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Sundae,
+      physics: {
+        collider: 'cylinder',
+        colliderArgs: [0.4, 0.4, 2.2],
+        modelPosition: [0, -1.1, 0],
       },
     },
   },
@@ -114,57 +155,9 @@ export default [
       scale: 1.4,
       rotation: [Math.PI * 0.1, Math.PI * -0.3, Math.PI * 0.02],
       physics: {
-        mass: 1,
         collider: 'cylinder',
         colliderArgs: [0.43, 0.37, 1.45],
-        modelScale: 4,
         modelPosition: [0, -0.74, 0],
-      },
-    },
-  },
-
-  {
-    name: 'Fries',
-    unitPrice: 0,
-    units: 10,
-    view: {
-      model: m.Fries,
-      physics: {
-        mass: 1,
-        collider: 'box',
-        colliderArgs: [1.0, 1.0, 1.0],
-        modelScale: 4,
-        modelPosition: [0, 0, 0],
-      },
-    },
-  },
-  {
-    name: 'Hot Dog',
-    unitPrice: 0,
-    units: 10,
-    view: {
-      model: m.HotDog,
-      physics: {
-        mass: 1,
-        collider: 'box',
-        colliderArgs: [1.0, 1.0, 1.0],
-        modelScale: 4,
-        modelPosition: [0, 0, 0],
-      },
-    },
-  },
-  {
-    name: 'Sundae',
-    unitPrice: 0,
-    units: 10,
-    view: {
-      model: m.Sundae,
-      physics: {
-        mass: 1,
-        collider: 'box',
-        colliderArgs: [1.0, 1.0, 1.0],
-        modelScale: 4,
-        modelPosition: [0, 0, 0],
       },
     },
   },
@@ -175,26 +168,9 @@ export default [
     view: {
       model: m.SodaCan,
       physics: {
-        mass: 1,
-        collider: 'box',
-        colliderArgs: [1.0, 1.0, 1.0],
-        modelScale: 4,
-        modelPosition: [0, 0, 0],
-      },
-    },
-  },
-  {
-    name: 'Salad',
-    unitPrice: 0,
-    units: 10,
-    view: {
-      model: m.Salad,
-      physics: {
-        mass: 1,
-        collider: 'box',
-        colliderArgs: [1.0, 1.0, 1.0],
-        modelScale: 4,
-        modelPosition: [0, 0, 0],
+        collider: 'cylinder',
+        colliderArgs: [0.43, 0.43, 1.32],
+        modelPosition: [0, -0.66, 0],
       },
     },
   },

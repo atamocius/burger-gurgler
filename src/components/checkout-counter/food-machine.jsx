@@ -9,24 +9,25 @@ import SceneLighting from './scene-lighting';
 import Floor from './floor';
 
 import PhysicalFood from './physical-food';
-import MMM from '../models/Frappe';
+// import MMM from '../models/Salad';
 
-function PhysBurger({ position, rotation, debug }) {
-  return (
-    <PhysicalFood
-      debug={debug}
-      model={MMM}
-      position={position}
-      rotation={rotation}
-      /////
-      mass={1}
-      collider='cylinder'
-      colliderArgs={[0.43, 0.37, 1.45]}
-      modelScale={4}
-      modelPosition={[0, -0.74, 0]}
-    />
-  );
-}
+// function PhysBurger({ position, rotation, debug }) {
+//   return (
+//     <PhysicalFood
+//       debug={debug}
+//       model={MMM}
+//       position={position}
+//       rotation={rotation}
+//       /////
+//       mass={1}
+//       collider='cylinder'
+//       colliderArgs={[1.12, 0.82, 0.94]}
+//       modelScale={4}
+//       modelPosition={[0, -0.48, 0]}
+//       modelRotation={[0, 0, 0]}
+//     />
+//   );
+// }
 
 const DEBUG = false;
 
@@ -64,6 +65,7 @@ export default function FoodMachine({ cart, drop }) {
       </Suspense>
 
       <OrbitControls target={new Vector3(0, 3, 0)} />
+      {/* <OrbitControls /> */}
     </Canvas>
   );
 }

@@ -10,7 +10,8 @@ export default function PhysicalFood({
   rotation = [0.4, Math.PI * 2 * Math.random(), 0.5],
   model: Model,
   modelScale = 4,
-  modelPosition,
+  modelPosition = [0, 0, 0],
+  modelRotation = [0, 0, 0],
   debug,
 }) {
   let boundingType;
@@ -45,7 +46,11 @@ export default function PhysicalFood({
 
   return (
     <group ref={ref}>
-      <Model scale={modelScale} position={modelPosition} />
+      <Model
+        scale={modelScale}
+        position={modelPosition}
+        rotation={modelRotation}
+      />
       {wf}
     </group>
   );
