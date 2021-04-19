@@ -10,8 +10,6 @@ import Cart from './components/cart';
 import StatusMessage from './components/status-message';
 import CheckoutCounter from './components/checkout-counter';
 
-// import { Stats } from '@react-three/drei';
-
 import data from './data/items';
 import * as food from './logic/food';
 
@@ -89,8 +87,6 @@ export default function App() {
       />
 
       <StatusMessage msg={error} />
-
-      {/* <Stats showPanel={0} /> */}
     </ThemeProvider>
   );
 }
