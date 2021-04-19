@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei';
 
 export default function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF('/resources/cakeBirthday.glb');
+  const { nodes, materials } = useGLTF('/cakeBirthday.glb');
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-0.28, 0, 0]}>
@@ -284,4 +284,4 @@ export default function Model(props) {
   );
 }
 
-useGLTF.preload('/resources/cakeBirthday.glb');
+useGLTF.preload('/cakeBirthday.glb');

@@ -7,7 +7,7 @@ import { useGLTF } from '@react-three/drei';
 
 export default function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF('/resources/turkey.glb');
+  const { nodes, materials } = useGLTF('/turkey.glb');
   return (
     <group ref={group} {...props} dispose={null}>
       <mesh
@@ -57,4 +57,4 @@ export default function Model(props) {
   );
 }
 
-useGLTF.preload('/resources/turkey.glb');
+useGLTF.preload('/turkey.glb');
