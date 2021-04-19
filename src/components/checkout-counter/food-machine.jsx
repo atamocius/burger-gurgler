@@ -1,7 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react';
 
 import { Vector3 } from 'three';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 

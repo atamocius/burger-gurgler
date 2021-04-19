@@ -122,4 +122,80 @@ export default [
       },
     },
   },
+
+  {
+    name: 'Fries',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Fries,
+      physics: {
+        mass: 1,
+        collider: 'box',
+        colliderArgs: [1.0, 1.0, 1.0],
+        modelScale: 4,
+        modelPosition: [0, 0, 0],
+      },
+    },
+  },
+  {
+    name: 'Hot Dog',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.HotDog,
+      physics: {
+        mass: 1,
+        collider: 'box',
+        colliderArgs: [1.0, 1.0, 1.0],
+        modelScale: 4,
+        modelPosition: [0, 0, 0],
+      },
+    },
+  },
+  {
+    name: 'Sundae',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Sundae,
+      physics: {
+        mass: 1,
+        collider: 'box',
+        colliderArgs: [1.0, 1.0, 1.0],
+        modelScale: 4,
+        modelPosition: [0, 0, 0],
+      },
+    },
+  },
+  {
+    name: 'Soda',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.SodaCan,
+      physics: {
+        mass: 1,
+        collider: 'box',
+        colliderArgs: [1.0, 1.0, 1.0],
+        modelScale: 4,
+        modelPosition: [0, 0, 0],
+      },
+    },
+  },
+  {
+    name: 'Salad',
+    unitPrice: 0,
+    units: 10,
+    view: {
+      model: m.Salad,
+      physics: {
+        mass: 1,
+        collider: 'box',
+        colliderArgs: [1.0, 1.0, 1.0],
+        modelScale: 4,
+        modelPosition: [0, 0, 0],
+      },
+    },
+  },
 ];
