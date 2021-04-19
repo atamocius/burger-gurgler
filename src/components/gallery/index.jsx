@@ -22,7 +22,7 @@ export default function Gallery({ inventory, cart, onItemAddToCart }) {
     const quantity = cartItem ? cartItem.quantity : 0;
     const data = { ...x, quantity };
     return (
-      <Grid key={x.name} item xl>
+      <Grid key={x.name} item>
         <ItemCard data={data} onAddToCart={() => onItemAddToCart(x.name)} />
       </Grid>
     );

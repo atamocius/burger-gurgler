@@ -20,7 +20,7 @@ import { toPesoFormat } from '../../utils/formatting';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 260,
+    width: 260,
   },
   media: {
     height: 220,
