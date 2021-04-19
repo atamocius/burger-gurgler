@@ -81,53 +81,53 @@ export default [
       },
     },
   },
-  {
-    name: 'Taco',
-    unitPrice: 1999,
-    units: 10,
-    view: {
-      model: m.Taco,
-      position: [0, -0.04, 0],
-      scale: 1.5,
-      rotation: [Math.PI * 0.3, Math.PI * 0.35, Math.PI * 0.07],
-      physics: {
-        collider: 'box',
-        colliderArgs: [1.45, 0.97, 0.45],
-        modelPosition: [0, -0.5, 0],
-      },
-    },
-  },
-  {
-    name: 'Salad',
-    unitPrice: 4999,
-    units: 10,
-    view: {
-      model: m.Salad,
-      position: [0, -0.08, 0],
-      scale: 1.17,
-      rotation: [Math.PI * 0.17, Math.PI * 0.4, Math.PI * 0.07],
-      physics: {
-        collider: 'cylinder',
-        colliderArgs: [1.12, 0.82, 0.94],
-        modelPosition: [0, -0.48, 0],
-      },
-    },
-  },
-  {
-    name: 'Cake',
-    unitPrice: 19949,
-    units: 10,
-    view: {
-      model: m.CakeBirthday,
-      position: [0, -0.1, 0],
-      scale: 1.1,
-      physics: {
-        collider: 'cylinder',
-        colliderArgs: [1.27, 1.27, 1.0],
-        modelPosition: [0, -0.52, 0],
-      },
-    },
-  },
+  // {
+  //   name: 'Taco',
+  //   unitPrice: 1999,
+  //   units: 10,
+  //   view: {
+  //     model: m.Taco,
+  //     position: [0, -0.04, 0],
+  //     scale: 1.5,
+  //     rotation: [Math.PI * 0.3, Math.PI * 0.35, Math.PI * 0.07],
+  //     physics: {
+  //       collider: 'box',
+  //       colliderArgs: [1.45, 0.97, 0.45],
+  //       modelPosition: [0, -0.5, 0],
+  //     },
+  //   },
+  // },
+  // {
+  //   name: 'Salad',
+  //   unitPrice: 4999,
+  //   units: 10,
+  //   view: {
+  //     model: m.Salad,
+  //     position: [0, -0.08, 0],
+  //     scale: 1.17,
+  //     rotation: [Math.PI * 0.17, Math.PI * 0.4, Math.PI * 0.07],
+  //     physics: {
+  //       collider: 'cylinder',
+  //       colliderArgs: [1.12, 0.82, 0.94],
+  //       modelPosition: [0, -0.48, 0],
+  //     },
+  //   },
+  // },
+  // {
+  //   name: 'Cake',
+  //   unitPrice: 19949,
+  //   units: 10,
+  //   view: {
+  //     model: m.CakeBirthday,
+  //     position: [0, -0.1, 0],
+  //     scale: 1.1,
+  //     physics: {
+  //       collider: 'cylinder',
+  //       colliderArgs: [1.27, 1.27, 1.0],
+  //       modelPosition: [0, -0.52, 0],
+  //     },
+  //   },
+  // },
   {
     name: 'Donut',
     unitPrice: 949,
@@ -160,22 +160,22 @@ export default [
       },
     },
   },
-  {
-    name: 'Mocha Frappe',
-    unitPrice: 11999,
-    units: 10,
-    view: {
-      model: m.Frappe,
-      position: [0, -0.35, 0],
-      scale: 1.4,
-      rotation: [Math.PI * 0.1, Math.PI * -0.3, Math.PI * 0.02],
-      physics: {
-        collider: 'cylinder',
-        colliderArgs: [0.43, 0.37, 1.45],
-        modelPosition: [0, -0.74, 0],
-      },
-    },
-  },
+  // {
+  //   name: 'Mocha Frappe',
+  //   unitPrice: 11999,
+  //   units: 10,
+  //   view: {
+  //     model: m.Frappe,
+  //     position: [0, -0.35, 0],
+  //     scale: 1.4,
+  //     rotation: [Math.PI * 0.1, Math.PI * -0.3, Math.PI * 0.02],
+  //     physics: {
+  //       collider: 'cylinder',
+  //       colliderArgs: [0.43, 0.37, 1.45],
+  //       modelPosition: [0, -0.74, 0],
+  //     },
+  //   },
+  // },
   {
     name: 'Soda',
     unitPrice: 1149,
