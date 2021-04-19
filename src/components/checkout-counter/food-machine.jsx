@@ -1,6 +1,5 @@
 import React, { Suspense, useState, useEffect } from 'react';
 
-import { Vector3 } from 'three';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
@@ -11,8 +10,6 @@ import Floor from './floor';
 import PhysicalFood from './physical-food';
 
 const DEBUG = false;
-
-const camTarget = new Vector3(0, 3, 0);
 
 export default function FoodMachine({ cart, drop }) {
   const [items, setItems] = useState([]);
@@ -43,7 +40,7 @@ export default function FoodMachine({ cart, drop }) {
         </Physics>
       </Suspense>
 
-      <OrbitControls target={camTarget} />
+      <OrbitControls target={[0, 3, 0]} />
     </Canvas>
   );
 }
