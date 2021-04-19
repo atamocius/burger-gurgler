@@ -11,11 +11,11 @@ import PhysicalFood from './physical-food';
 
 const DEBUG = false;
 
-export default function FoodMachine({ cart, drop }) {
+export default function FoodMachine({ cart, claim }) {
   const [items, setItems] = useState([]);
 
   useEffect(async () => {
-    if (!drop) {
+    if (!claim) {
       return;
     }
 
@@ -23,7 +23,7 @@ export default function FoodMachine({ cart, drop }) {
       setItems(prevItems => [...prevItems, value]);
       await new Promise(resolve => setTimeout(resolve, 600));
     }
-  }, [drop]);
+  }, [claim]);
 
   return (
     <Canvas

@@ -42,18 +42,18 @@ const useStyles = makeStyles(theme => ({
 export default function CheckoutCounter({ cart, open, onExit }) {
   const classes = useStyles();
 
-  const [dropOrder, setDropOrder] = useState(false);
+  const [orderClaimed, setOrderClaimed] = useState(false);
 
   const handleClaimOrder = () => {
-    setDropOrder(true);
+    setOrderClaimed(true);
   };
 
   const handleExit = () => {
-    setDropOrder(false);
+    setOrderClaimed(false);
     onExit();
   };
 
-  const fab = dropOrder ? null : (
+  const fab = orderClaimed ? null : (
     <div className={classes.fabContainer}>
       <Fab
         className={classes.fab}
@@ -91,7 +91,7 @@ export default function CheckoutCounter({ cart, open, onExit }) {
       </AppBar>
 
       <div className={classes.counter}>
-        <FoodMachine cart={cart} drop={dropOrder} />
+        <FoodMachine cart={cart} claim={orderClaimed} />
         {fab}
       </div>
     </Dialog>
