@@ -55,9 +55,9 @@ export default [
     units: 10,
     view: {
       model: m.Pizza,
-      position: [0, 0.05, 0],
+      position: [0, 0.07, 0],
       scale: 1.1,
-      rotation: [Math.PI * 0.15, Math.PI * 0.3, Math.PI * 0.07],
+      rotation: [Math.PI * 0.2, Math.PI * 0.0, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [1.68, 1.68, 0.16],
@@ -99,10 +99,13 @@ export default [
   },
   {
     name: 'Salad',
-    unitPrice: 0,
+    unitPrice: 4999,
     units: 10,
     view: {
       model: m.Salad,
+      position: [0, -0.08, 0],
+      scale: 1.17,
+      rotation: [Math.PI * 0.17, Math.PI * 0.4, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [1.12, 0.82, 0.94],
@@ -117,6 +120,7 @@ export default [
     view: {
       model: m.CakeBirthday,
       position: [0, -0.1, 0],
+      scale: 1.1,
       physics: {
         collider: 'cylinder',
         colliderArgs: [1.27, 1.27, 1.0],
@@ -130,9 +134,9 @@ export default [
     units: 10,
     view: {
       model: m.DonutSprinkles,
-      position: [0, -0.1, 0],
+      position: [0, -0.05, 0],
       scale: 2.5,
-      rotation: [Math.PI * 0.1, Math.PI * 0.4, Math.PI * 0.07],
+      rotation: [Math.PI * 0.17, Math.PI * 0.4, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [0.5, 0.5, 0.33],
@@ -142,10 +146,13 @@ export default [
   },
   {
     name: 'Sundae',
-    unitPrice: 0,
+    unitPrice: 1999,
     units: 10,
     view: {
       model: m.Sundae,
+      position: [0, -0.36, 0],
+      scale: 1.1,
+      rotation: [Math.PI * 0.05, Math.PI * 0.4, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [0.4, 0.4, 2.2],
@@ -171,10 +178,13 @@ export default [
   },
   {
     name: 'Soda',
-    unitPrice: 0,
+    unitPrice: 1149,
     units: 10,
     view: {
       model: m.SodaCan,
+      position: [0, -0.25, 0],
+      scale: 1.6,
+      rotation: [Math.PI * 0.1, Math.PI * 0.4, Math.PI * 0.07],
       physics: {
         collider: 'cylinder',
         colliderArgs: [0.43, 0.43, 1.32],
