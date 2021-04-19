@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { wait } from '../../utils/promise-helpers';
 import PhysicalFood from './physical-food';
 
 const DEBUG = false;
@@ -14,7 +15,7 @@ export default function OrderQueue({ cart, claim }) {
 
     for (let value of orderSequence(cart)) {
       setItems(prevItems => [...prevItems, value]);
-      await new Promise(resolve => setTimeout(resolve, 600));
+      await wait(600);
     }
   }, [claim]);
 
