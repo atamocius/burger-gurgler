@@ -7,7 +7,7 @@ export default function PhysicalFood({
   colliderArgs,
   mass = 1,
   position = [0, 12, 0],
-  rotation = [0.4, 0.2, 0.5],
+  rotation = [0.4, Math.PI * 2 * Math.random(), 0.5],
   model: Model,
   modelScale = 4,
   modelPosition,
