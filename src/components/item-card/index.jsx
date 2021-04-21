@@ -16,7 +16,7 @@ import { Canvas } from '@react-three/fiber';
 
 import RotatingModel from './rotating-model';
 
-import { toPesoFormat } from '../../utils/formatting';
+import { toPesoFormat } from '~/utils/formatting';
 
 const useStyles = makeStyles(theme => ({
   root: {

@@ -1,4 +1,4 @@
-import * as m from '../components/models';
+import * as m from '~/components/models';
 
 export default [
   {

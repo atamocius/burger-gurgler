@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 
-import ItemCard from '../item-card';
+import ItemCard from '~/components/item-card';
 
 const useStyles = makeStyles(theme => ({
   root: {

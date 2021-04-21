@@ -20,7 +20,7 @@ import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-import { toPesoFormat } from '../../utils/formatting';
+import { toPesoFormat } from '~/utils/formatting';
 
 const useStyles = makeStyles(theme => ({
   table: {

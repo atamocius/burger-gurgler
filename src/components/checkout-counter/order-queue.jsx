@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { wait } from '../../utils/promise-helpers';
+import { wait } from '~/utils/promise-helpers';
 import PhysicalFood from './physical-food';
 
 const DEBUG = false;

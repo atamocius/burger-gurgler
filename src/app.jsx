@@ -1,17 +1,12 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React from 'react';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { red, orange } from '@material-ui/core/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import TitleBar from './components/title-bar';
-import Gallery from './components/gallery';
-import Cart from './components/cart';
-import StatusMessage from './components/status-message';
-import CheckoutCounter from './components/checkout-counter';
 
-import data from './data/items';
-import * as food from './logic/food';
+import FoodMenu from './pages/food-menu';
 
 const theme = createMuiTheme({
   typography: {
@@ -31,62 +26,13 @@ const theme = createMuiTheme({
 });
 
 export default function App() {
-  const [checkooutOpen, setCheckoutOpen] = useState(false);
-  const [foodState, foodDispatch] = useReducer(food.reducer, food.initialState);
-
-  const handleCheckout = () => {
-    setCheckoutOpen(true);
-  };
-
-  const handleExitCheckout = () => {
-    setCheckoutOpen(false);
-    // Reset everything
-    foodDispatch(food.load(data));
-  };
-
-  const handleItemAddToCart = itemName => {
-    foodDispatch(food.addToCart(itemName));
-  };
-
-  const handleAddUnitToCart = itemName => {
-    foodDispatch(food.addToCart(itemName));
-  };
-
-  const handleRemoveUnitFromCart = itemName => {
-    foodDispatch(food.removeFromCart(itemName));
-  };
-
-  // Initialize data
-  useEffect(() => {
-    foodDispatch(food.load(data));
-  }, []);
-
-  const { inventory, cart, error } = foodState;
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
       <TitleBar />
 
-      <Gallery
-        inventory={inventory}
-        cart={cart}
-        onItemAddToCart={handleItemAddToCart}
-      />
-      <Cart
-        items={cart}
-        onCheckout={handleCheckout}
-        onAddUnit={handleAddUnitToCart}
-        onRemoveUnit={handleRemoveUnitFromCart}
-      />
-      <CheckoutCounter
-        cart={cart}
-        open={checkooutOpen}
-        onExit={handleExitCheckout}
-      />
-
-      <StatusMessage msg={error} />
+      <FoodMenu />
     </ThemeProvider>
   );
 }
