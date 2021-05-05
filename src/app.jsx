@@ -5,6 +5,7 @@ import { red, orange } from '@material-ui/core/colors';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import TitleBar from './components/title-bar';
+import GitHubLink from './components/github-link';
 
 import FoodMenu from './pages/food-menu';
 
@@ -31,8 +32,9 @@ export default function App() {
       <CssBaseline />
 
       <TitleBar />
-
       <FoodMenu />
+
+      <GitHubLink />
     </ThemeProvider>
   );
 }
